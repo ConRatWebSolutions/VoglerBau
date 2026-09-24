@@ -271,6 +271,12 @@ img{max-width: 100%; height:auto}
 	.navbar-collapse .primary-menu__link { display: block; padding: 12px 10px; }
 }
 
+/* Einwilligungs-Checkbox bündig mit den Feldern statt links herausragend */
+.bggray .form-check { padding-left: 0; }
+.bggray .form-check-wrapping-label { display: flex; align-items: flex-start; gap: 10px; }
+.bggray .form-check-input { position: static; flex: 0 0 16px; margin: 4px 0 0; }
+.bggray .form-check-label { margin: 0; }
+
 @media (max-width: 767px) {
 	/* nichts über den Bildschirmrand hinaus */
 	.ce-left .image, .ce-right .image { padding: 0; }
@@ -279,12 +285,21 @@ img{max-width: 100%; height:auto}
 	.product-list-section .col-md-6, .teaser-section .col-md-6 { padding-left: 15px; padding-right: 15px; }
 	.frame-layout-1 h1 { font-size: 28px; overflow-wrap: break-word; hyphens: auto; }
 
+	/* mehr Luft zum Bildschirmrand (vorher 15 px) */
+	.container { padding-left: 24px; padding-right: 24px; }
+	.product-list-section .col-md-6, .teaser-section .col-md-6 { padding-left: 0; padding-right: 0; }
+	.sc-product-detail-header { margin-left: 24px; margin-right: 24px; }
+	.bggray { padding: 40px 0; }
+	.bggray > .frame-type-text { padding: 0 24px; }
+	.text-notably { font-size: 24px; }
+	.bggray .frame-layout-1 { padding: 30px 0 0; font-size: 20px; line-height: 1.6; }
+
 	/* Willkommenstext unter dem Startbild statt ausgeblendet */
 	.product-detail-overlay {
 		display: block !important;
 		position: static;
 		width: auto;
-		padding: 20px 15px;
+		padding: 24px;
 		background: #8d8a8a;
 		color: #fff;
 	}
