@@ -1,4 +1,4 @@
--- Inhaltskorrekturen Vogler Bau, 2026-09-24
+-- Inhaltskorrekturen Vogler Bau, 2026-09-24 (Punkt 5 „Leistungstitel“ separat: 2026-09-24-leistungstitel.sql, erst mit dem neuen Design)
 -- Wiederholbar (idempotent). Ausführen lokal:  ddev mysql < scripts/inhalte/2026-09-24-korrekturen.sql
 -- Danach: vendor/bin/typo3 cache:flush
 
@@ -34,9 +34,3 @@ UPDATE tt_content SET bodytext = REPLACE(REPLACE(REPLACE(bodytext,
 
 -- 4) Footer: „Datenschutzhinweis“ verlinkte auf ?cmpscreen (Cookie-Tool, das nicht eingebunden ist) → ausblenden
 UPDATE pages SET hidden = 1, tstamp = UNIX_TIMESTAMP() WHERE uid = 13 AND link = '?cmpscreen';
-
--- 5) Leistungen: Titel als <h3> statt <h1>, ohne Leerzeilen
-UPDATE tt_content SET bodytext = REPLACE(REPLACE(REPLACE(REPLACE(bodytext,
-    '<h1><br /> ', '<h3>'), '<h1>', '<h3>'), '</h1>', '</h3>'), '<p>&nbsp;</p>', ''),
-    tstamp = UNIX_TIMESTAMP() WHERE uid IN (11, 12, 13, 26);
-UPDATE tt_content SET bodytext = TRIM(BOTH '\n' FROM bodytext) WHERE uid IN (11, 12, 13, 26);
