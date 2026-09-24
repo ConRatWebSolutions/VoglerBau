@@ -355,6 +355,3 @@ config {
     noScaleUp = 1
 }
 config.baseURL = {$c4theme.baseURL}
-[globalString = _SERVER|HTTPS=on]
-    config.baseURL = {$c4theme.baseURL}
-[global]
