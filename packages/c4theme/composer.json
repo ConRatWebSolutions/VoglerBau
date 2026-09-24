@@ -1,0 +1,16 @@
+{
+    "name": "conrat/c4theme",
+    "type": "typo3-cms-extension",
+    "description": "Vogler Bau sitepackage (page frame)",
+    "license": "GPL-2.0-or-later",
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": "^14.3",
+        "typo3/cms-fluid-styled-content": "^14.3"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "c4theme"
+        }
+    }
+}

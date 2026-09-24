@@ -1,0 +1,28 @@
+ <!-- START : Footer -->
+  <footer class="footer-main text-20">
+
+
+    <div class="footer-main__bottom">
+      <div class="container : text-center">
+        <nav class="footer-main__nav">
+          <ul>
+            <f:for each="{datenschutzNavigation}" as="item">
+                <li>
+                    <a href="{item.link}" rel="noopener noreferrer" title="{item.title}" target="{f:if(condition:'{item.target}', then:'{item.target}', else:'_top')}">
+                        <f:if condition="{item.files}">
+                            <f:then>
+                                <f:image image="{item.files.0}" title="{item.title}" />
+                            </f:then>
+                            <f:else>
+                                {item.title}
+                            </f:else>
+                        </f:if>
+                    </a>
+                </li>
+            </f:for>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <!-- END : Footer -->

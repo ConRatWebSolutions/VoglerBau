@@ -1,0 +1,53 @@
+#!/bin/bash
+## Description: Code (config, packages, vendor, _assets, var/labels) auf Live übertragen – vorher "ddev check"
+## Usage: deploy live
+
+set -eux
+
+declare -A target
+
+targetName="${1:-}"
+if [ -z "$targetName" ]; then
+    echo "Usage: ddev deploy live"
+    exit 1
+fi
+
+targetDir=$(dirname "$0")/targets
+if [ ! -f "$targetDir/$targetName" ]; then
+    echo "Error: Unknown target '$targetName'. Available: live"
+    exit 1
+fi
+. "$targetDir"/"$targetName"
+
+read -p "Deploy to '$targetName' as user '${target[sshUser]}'? (ja/nein): " userInput
+if [ "$userInput" != "ja" ]; then
+    echo "Deploy abgebrochen."
+    exit 1
+fi
+
+ssh="${target[sshUser]}@${target[sshHost]}"
+base="~${target[remoteBaseDir]}"
+
+# Backup nur von dem, was der Deploy überschreibt (fileadmin und var/ bleiben unberührt)
+backupDir="~/typo3_${targetName}_backup_$(date +"%Y%m%d_%H%M%S")"
+ssh "$ssh" "
+    set -e
+    mkdir -p ${backupDir}/public ${backupDir}/var
+    cd ${base}
+    cp -rp config packages vendor ${backupDir}/
+    cp -p composer.json composer.lock ${backupDir}/ 2>/dev/null || true
+    cp -rp public/_assets ${backupDir}/public/ 2>/dev/null || true
+    cp -rp var/labels ${backupDir}/var/ 2>/dev/null || true
+    du -sh ${backupDir}
+"
+
+rsync -avz --delete --chmod=D755,F644 --exclude=.DS_Store config/   "$ssh":${base}/config
+rsync -avz --delete --chmod=D755,F644 --exclude=.DS_Store packages/ "$ssh":${base}/packages
+rsync -avz --delete --chmod=D755,F644 var/labels/       "$ssh":${base}/var/labels
+rsync -avz --delete --chmod=D755,F644 vendor/           "$ssh":${base}/vendor
+rsync -avz --delete --chmod=D755,F644 public/_assets/   "$ssh":${base}/public/_assets
+rsync -avz --chmod=F644 composer.json composer.lock     "$ssh":${base}/
+
+ssh "$ssh" "cd ${base} && ${target[remotePhp]} vendor/bin/typo3 cache:flush"
+
+echo "Deploy nach '$targetName' abgeschlossen. Backup: ${backupDir}"

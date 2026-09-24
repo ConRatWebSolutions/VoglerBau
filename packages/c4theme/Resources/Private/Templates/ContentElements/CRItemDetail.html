@@ -1,0 +1,23 @@
+ <div class="product-detail-container">
+    <div class="product-detail-item" data-mh="product-detail-item">
+
+      <div class="product-detail-item__image">
+            <f:if condition="{image.0}">
+                <f:then>
+                    <f:image image="{image.0}"/>
+                </f:then>
+                <f:else>
+
+                </f:else>
+            </f:if>
+      </div>
+      <div class="product-detail-overlay">
+      <div class="product-detail-item__title">
+        <h2>{data.header}</h2>
+      </div>
+      <div class="product-detail-item__text text-19">
+         <f:format.html>{data.bodytext}</f:format.html>
+      </div>
+      </div>
+    </div>
+ </div>

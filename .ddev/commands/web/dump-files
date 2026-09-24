@@ -1,0 +1,13 @@
+#!/bin/bash
+## Description: fileadmin vom Live-Server holen (nur lesend, lokal nichts löschen)
+## Usage: dump-files
+
+set -eux
+
+declare -A target
+. "$(dirname "$0")"/targets/live
+
+rsync -avz --exclude=/_processed_/ --exclude=.DS_Store \
+    "${target[sshUser]}"@"${target[sshHost]}":~${target[remoteBaseDir]}/public/fileadmin/ ./public/fileadmin/
+
+echo "fileadmin wurde vom Server aktualisiert."

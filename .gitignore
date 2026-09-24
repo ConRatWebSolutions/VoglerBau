@@ -1,0 +1,13 @@
+.DS_Store
+.idea
+nbproject
+/var/*
+!/var/labels
+/vendor
+/public/*
+!/public/.htaccess
+/data
+.env
+.env.*
+# enthält encryptionKey und Install-Tool-Hash – nicht ins Repo (Kopie liegt auf dem Server)
+/config/system/settings.php

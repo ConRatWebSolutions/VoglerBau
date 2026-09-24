@@ -1,0 +1,19 @@
+#!/bin/bash
+## Description: Probelauf für "ddev deploy live" – zeigt Unterschiede, überträgt nichts
+## Usage: check
+
+set -eux
+
+declare -A target
+. "$(dirname "$0")"/targets/live
+
+# Zeilen mit "deleting" = Datei würde auf dem Server gelöscht
+remote="${target[sshUser]}@${target[sshHost]}:~${target[remoteBaseDir]}"
+rsync -anc --delete -i --exclude=.DS_Store config/      "$remote/config"
+rsync -anc --delete -i --exclude=.DS_Store packages/    "$remote/packages"
+rsync -anc --delete -i var/labels/  "$remote/var/labels"
+rsync -anc --delete -i vendor/      "$remote/vendor"
+rsync -anc --delete -i public/_assets/ "$remote/public/_assets"
+rsync -anc -i composer.json composer.lock "$remote/"
+
+echo "Probelauf abgeschlossen – es wurde nichts verändert."

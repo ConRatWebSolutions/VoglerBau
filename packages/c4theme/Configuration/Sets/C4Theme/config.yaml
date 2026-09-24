@@ -1,0 +1,16 @@
+name: conrat/c4theme
+label: 'C4Theme (Vogler Bau)'
+dependencies:
+  - typo3/fluid-styled-content
+  - typo3/form
+settings:
+  c4theme:
+    rootpage: 1
+    mainNavPid: '2'
+    socialNavPid: ''
+    datenschutzmenuPid: '8'
+    mainLogoPath: '/fileadmin/webdaten/logo.png'
+    navigationLogoPath: ''
+    faviconPath: '/fileadmin/webdaten/favicon'
+    baseURL: ''
+    googleAnalytics: ''

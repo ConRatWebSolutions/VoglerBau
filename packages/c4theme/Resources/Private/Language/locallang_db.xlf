@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="de" datatype="plaintext" original="messages" date="2026-07-16T00:00:00Z" productName="c4theme">
+        <header>
+            <authorName>ConRat WebSolutions GmbH</authorName>
+            <authorEmail>info@conrat.de</authorEmail>
+        </header>
+        <body>
+            <trans-unit id="wizard.cr_itemdetail">
+                <source>Artikeldetails Element</source>
+            </trans-unit>
+            <trans-unit id="wizard.cr_itemdetail.desc">
+                <source>Bild mit Überschrift und Text, z.B. für Detailseiten.</source>
+            </trans-unit>
+            <trans-unit id="wizard.cr_logobanner">
+                <source>Logo Banner Element</source>
+            </trans-unit>
+            <trans-unit id="wizard.cr_logobanner.desc">
+                <source>Überschrift und Text neben einem Bild, z.B. für Firmenhistorie.</source>
+            </trans-unit>
+            <trans-unit id="wizard.cr_banner">
+                <source>Banner Slider</source>
+            </trans-unit>
+            <trans-unit id="wizard.cr_banner.desc">
+                <source>Bildergalerie/Slider mit mehreren Bildern, z.B. für den Seitenkopf.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

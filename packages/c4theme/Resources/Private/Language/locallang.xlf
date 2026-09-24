@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="de" datatype="plaintext" original="messages" date="2026-07-15T00:00:00Z" productName="c4theme">
+        <header>
+            <authorName>ConRat WebSolutions GmbH</authorName>
+            <authorEmail>info@conrat.de</authorEmail>
+        </header>
+        <body>
+            <trans-unit id="pagePrefix">
+                <source>Sie befinden sich hier: </source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

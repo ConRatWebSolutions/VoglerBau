@@ -1,0 +1,11 @@
+#!/bin/bash
+# Live-Server Vogler Bau – Zugänge im Obsidian-Vault VoglerBau.
+# DB-Zugangsdaten bleiben auf dem Server (~/typo3_14/.env.live) und werden dort gelesen.
+
+target=(
+   [sshUser]=ssh-460478-vogler
+   [sshHost]=vogler-bau-gmbh.de
+   [sshPort]=22
+   [remoteBaseDir]=/typo3_14
+   [remotePhp]=/usr/bin/php83
+)

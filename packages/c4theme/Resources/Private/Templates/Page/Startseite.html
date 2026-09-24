@@ -1,0 +1,20 @@
+<f:layout name="Default" />
+<f:section name="Main">
+    <f:cObject typoscriptObjectPath="lib.dynamicContentSlide" data="{colPos: '100'}" />
+    <section class="teaser-section">
+        <div class="container">
+            <div class="breadcrumb">
+                <nav aria-label="Breadcrumb">
+                    <ul>
+                        <li><f:translate key="pagePrefix" extensionName="c4theme"/><f:link.page pageUid="{data.uid}">{data.title}</f:link.page></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="teaser">
+                <div class="row">
+                    <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '0'}" />
+                </div>
+            </div>
+        </div>
+    </section>
+</f:section>

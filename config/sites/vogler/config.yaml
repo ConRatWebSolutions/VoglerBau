@@ -1,0 +1,20 @@
+base: 'https://www.vogler-bau-gmbh.de/'
+baseVariants:
+  -
+    base: 'https://vogler-bau.ddev.site'
+    condition: 'applicationContext == "Development"'
+dependencies:
+  - conrat/c4theme
+languages:
+  -
+    title: deutsch
+    enabled: true
+    locale: de_DE.utf8
+    hreflang: ''
+    base: /
+    websiteTitle: ''
+    navigationTitle: ''
+    flag: de
+    languageId: 0
+rootPageId: 1
+websiteTitle: ''

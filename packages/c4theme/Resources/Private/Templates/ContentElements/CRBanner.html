@@ -1,0 +1,39 @@
+<!-- START : Banner section -->
+  <section class="banner-section" role="contentinfo" tabindex="-1">
+	<script type="text/javascript" src="{f:uri.resource(path: 'Js/unitegallery/js/jquery-11.0.min.js', extensionName: 'c4theme')}"></script>
+	<script type="text/javascript" src="{f:uri.resource(path: 'Js/unitegallery/js/unitegallery.min.js', extensionName: 'c4theme')}"></script>
+
+	<link rel="stylesheet" href="{f:uri.resource(path: 'Js/unitegallery/css/unite-gallery.css', extensionName: 'c4theme')}" type="text/css" />
+
+	<script type="text/javascript" src="{f:uri.resource(path: 'Js/unitegallery/themes/tiles/ug-theme-tiles.js', extensionName: 'c4theme')}"></script>
+
+<div id="gallery" style="display:none;">
+		<f:for each="{images}" as="image">
+
+
+		<img alt="{image.alternative}"
+		     src="{f:uri.image(image: image)}"
+		     data-image="{f:uri.image(image: image)}"
+		     data-description="{image.title}"
+		     style="display:none">
+
+
+		</f:for>
+	</div>
+
+
+	<script type="text/javascript">
+
+		jQuery(document).ready(function(){
+
+			jQuery("#gallery").unitegallery({
+				tiles_type:"justified"
+			});
+
+		});
+
+	</script>
+
+
+</section>
+<!-- END : Banner section -->

@@ -1,0 +1,29 @@
+#!/bin/bash
+## Description: Live-Datenbank holen und lokal einspielen (Dump bleibt in data/)
+## Usage: dump-db-fast
+
+set -eux
+
+declare -A target
+. "$(dirname "$0")"/targets/live
+
+dataDir="/var/www/html/data/"
+mkdir -p "$dataDir"
+dumpFile="$dataDir$(date +%Y-%m-%d_%H-%M-%S)-db.sql.gz"
+
+# Zugangsdaten werden auf dem Server aus .env.live gelesen; Cache-/Session-Tabellen nur als Struktur
+ssh -p "${target[sshPort]}" "${target[sshUser]}"@"${target[sshHost]}" '
+    set -e
+    cd ~'"${target[remoteBaseDir]}"'
+    set -a; . ./.env.live; set +a
+    db=$TYPO3_CONF_VARS__DB__Connections__Default__dbname
+    export MYSQL_PWD=$TYPO3_CONF_VARS__DB__Connections__Default__password
+    opts="-h $TYPO3_CONF_VARS__DB__Connections__Default__host -P $TYPO3_CONF_VARS__DB__Connections__Default__port -u $TYPO3_CONF_VARS__DB__Connections__Default__user"
+    skip=$(mysql $opts -N -e "SHOW TABLES" "$db" | grep -E "^(cache_.*|be_sessions|fe_sessions|sys_log|sys_lockedrecords)$" | sed "s/^/--ignore-table=$db./" | tr "\n" " ")
+    { mysqldump $opts --single-transaction --no-tablespaces $skip "$db"
+      mysqldump $opts --single-transaction --no-tablespaces --no-data "$db" $(mysql $opts -N -e "SHOW TABLES" "$db" | grep -E "^(cache_.*|be_sessions|fe_sessions|sys_log|sys_lockedrecords)$" | tr "\n" " ")
+    } | gzip -9
+' > "$dumpFile"
+
+zcat "$dumpFile" | mysql -h db -u root -proot db
+echo "Datenbank eingespielt: $dumpFile"

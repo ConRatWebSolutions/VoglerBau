@@ -1,0 +1,263 @@
+.frame-space-before-extra-large {margin-top:5em}
+.frame-space-before-large {margin-top:4em}
+.frame-space-before-medium {margin-top:3em}
+.frame-space-before-small {margin-top:2em}
+.frame-space-before-extra-small {margin-top:1em}
+
+.frame-space-after-extra-large {margin-bottom:9em}
+.frame-space-after-large {margin-bottom:4em}
+.frame-space-after-medium {margin-bottom:3em}
+.frame-space-after-small {margin-bottom:2em}
+.frame-space-after-extra-small {margin-bottom:1em}
+
+.ce-headline-center {text-align: center}
+.frame-type-textpic {width:100%}
+
+
+.ce-right .image {padding: 0 0 0 30px}
+.ce-left .image {padding:0 30px 0 0}
+
+.hcenter{display: flex;
+justify-content: center;
+align-items: center;}
+
+ 
+.col-lg-offset-1 { padding-left:80px} 
+.header-main, footer {background:#8d8a8a}
+.logo {
+     position: fixed;
+    left: 40%;
+    right: 40%;
+    top: 0;
+    margin: 0 auto;
+    width: 220px;
+    z-index: 9; 
+     width:220px
+}
+
+.header-main__logo   { }
+ 
+
+.navigation{
+	background:#8d8a8a;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;	
+	padding: 10px;
+	z-index: 8;
+	
+}
+.navbar-nav {margin:15px 0;width: 73%;margin: 0 auto;}
+.primary-menu__link {color:#fff; padding:25px 0; font-size:20px}
+#navbar3 {padding-right:250px}
+/*#navbar4 {padding-right:540px}
+ #navbar6 {padding-right:220px}*/
+
+#navbar4 {padding-right:420px}
+#navbar6 {padding-right:130px}
+#navbar15 {padding-right:130px}
+footer{
+	text-align: center;
+}
+.footer-main__nav ul{
+	
+	text-align: center;
+	width: auto;
+	display: inline-block;	
+}
+
+.footer-main__nav li {float:left; list-style-type:none }
+.footer-main__nav a {
+	color: #fff;
+	padding: 15px 15px 0 15px;
+	display: block;
+	font-size: 18px;
+}
+
+.grid-container-2column .grid-column-100, .grid-container-2column .grid-column-200 { width:50%; float:left}
+.grid-container-2column .grid-row-1:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+ .product-detail-item {margin-top:50px}
+.product-detail-container{margin-bottom: 50px;}
+.product-detail-overlay {
+	position: absolute;
+	top: 180px;
+	left: 110px;
+	width: 500px;
+	padding: 25px;
+	background: rgba(0, 0, 0, .5);
+	color: #fff;
+	z-index: 5;
+	
+}
+.sc-product-detail-header { margin:50px 5%}
+.sc-product-detail-header ul {list-style: none; margin:0; padding:0 }
+.sc-product-detail-header ul li{ margin-bottom:35px}
+ 
+.h2, h2 {
+    font-size: 40px;
+    font-weight: 600;
+}
+.h3, h3 {
+    font-size: 30px;
+}
+img{max-width: 100%; height:auto}
+
+ 
+.frame-layout-1:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+.frame-layout-1 .ce-bodytext, .frame-layout-1 .ce-gallery {width: 50% !important}
+
+.frame-layout-1 .ce-left .ce-bodytext { text-align: right}
+
+  hr {border: 2px solid red; width: 50%;}
+.ce-left  hr {float:right}
+.ce-right hr {float:left}
+ 
+.text-notably::before{
+	content: '';
+  background:url('../img/telefon.png');
+  width: 83px;
+  height:  82px;
+  display: block;
+  position: absolute;
+  left: -110px;
+  top:-1px
+	
+}
+.text-notably {
+	background:#cb302a; 
+	border: 3px solid #fff;
+	color:#fff; 
+	font-size:40px;
+	font-weight: bold;
+	padding: 8px 16px;
+    display: table;
+    margin:0 auto;
+   position:relative
+	 } 
+ 
+ 
+.tx-powermail h3 {display:none} 
+ .tx-powermail .powermail_legend {color:#fff; font-size:40px; margin-bottom: 40px;} 
+.powermail_input, .powermail_textarea     {
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin-bottom:20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+} 
+.powermail_textarea  {height:220px}
+.powermail_submit {
+	
+  background: url("/fileadmin/webdaten/submit.png") no-repeat scroll 0 0 transparent;
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+  height: 74px;
+  padding-bottom: 2px;
+  width: 74px;
+  border: none;
+	text-indent: -9999px;
+	position: absolute;
+	right: 0;
+	bottom: 100px;	
+}
+
+.tx-powermail .checkbox label{color:#fff}
+.bggray  { background: #8d8a8a; padding:50px}
+.bggray .frame-layout-1 { color:#fff; font-size:25px;line-height: 45px; padding:85px 0 0 80px}
+.bggray a {color:#fff}
+
+@media (max-width: 1600px) {
+	#navbar3 {    padding-right: 142px;}
+	#navbar4 {    padding-right: 390px;}
+	#navbar6 {    padding-right: 172px;}
+    
+/* #navbar6 {padding-right:220px}*/
+#navbar6 {padding-right:70px}
+#navbar15 {padding-right:70px}    
+    
+    
+    .product-detail-overlay{
+		width: 932px;
+		text-align: center;
+		top: 231px;
+		left: 19%;	
+  		padding:10px
+  	
+  }
+}
+@media (max-width: 1510px) {
+	
+}
+@media (max-width: 1350px) {
+	#navbar3 {    padding-right: 82px;}
+	#navbar6 {    padding-right: 100px;}
+	 .product-detail-overlay {display:none}
+}
+@media (max-width: 1200px) {
+	.navbar-nav {width:auto}
+
+}
+@media (max-width: 1000px) {
+	.bggray .col-md-6 {width:100%; flex: unset; max-width: 100%;}
+
+}
+
+
+ 
+@media (max-width: 767px) {
+	 .main {overflow: hidden}
+	.frame-layout-1 .ce-bodytext, .frame-layout-1 .ce-gallery {  width: 100% !important;}
+	.grid-container-2column .grid-column-100, .grid-container-2column .grid-column-200	{  width: 100% !important;}
+	.ce-right .ce-column {    padding-left: 0px;    padding-right: 0;}
+	.frame-layout-1 .ce-left .ce-bodytext { padding:10px 30px}
+	.frame-layout-1 .ce-right .ce-bodytext { padding:10px 30px}
+	.header-main__logo {
+    	 position: absolute;
+    	right: 2%;
+    	 left: unset !important;
+    	width: 100px;
+    }
+    .header-main__logo img { width:100px}
+    .bggray .frame-layout-1 {  padding: 85px 0 0 10px;}
+    .text-notably::before { 
+    content: '';
+    background: none;
+    width: 0;
+    height: 0;
+    display: block;
+    
+    }
+    .mosaicflow { margin:0 }
+ 
+}
+
+
+ 
+
+
+  

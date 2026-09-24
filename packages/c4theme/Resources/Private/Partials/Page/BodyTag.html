@@ -1,0 +1,16 @@
+
+<f:switch expression="{class_bodyStyle}">
+	<f:case value="1">
+		<f:render section="body" arguments="{bodyId:bodyId,class_layoutId:class_layoutId,class_pageUid:class_pageUid,style:'body-light',class_bodyfsize:class_bodyfsize}"/>
+	</f:case>
+	<f:defaultCase>
+		<f:render section="body" arguments="{_all}"/>
+	</f:defaultCase>
+</f:switch>
+
+
+
+
+<f:section name="body">
+	<body id="{bodyId}" class="{class_layoutId} {class_pageUid} {style} {class_bodyfsize}">
+</f:section>

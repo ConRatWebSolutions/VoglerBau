@@ -1,0 +1,360 @@
+################
+#### HELPER ####
+################
+# Generic colPos-based content renderer used by the page templates.
+#
+#  0   = main
+#  2   = extra
+#  5/6 = two-column "Kontakt"
+#  7   = map
+#  8   = address
+#  9   = full
+#  100 = banner
+lib.dynamicContent = COA
+lib.dynamicContent {
+    5 = LOAD_REGISTER
+    5 {
+        colPos.cObject = TEXT
+        colPos.cObject {
+            field = colPos
+            ifEmpty.cObject = TEXT
+            ifEmpty.cObject {
+                value.current = 1
+                ifEmpty = 0
+            }
+        }
+        pageUid.cObject = TEXT
+        pageUid.cObject {
+            field = pageUid
+            ifEmpty.data = TSFE:id
+        }
+        contentFromPid.cObject = TEXT
+        contentFromPid.cObject {
+            data = DB:pages:{register:pageUid}:content_from_pid
+            data.insertData = 1
+        }
+        wrap.cObject = TEXT
+        wrap.cObject {
+            field = wrap
+        }
+    }
+    20 = CONTENT
+    20 {
+        table = tt_content
+        select {
+            includeRecordsWithoutDefaultTranslation = 1
+            orderBy = sorting
+            where = {#colPos}={register:colPos}
+            where.insertData = 1
+            pidInList.data = register:pageUid
+            pidInList.override.data = register:contentFromPid
+        }
+        stdWrap {
+            dataWrap = {register:wrap}
+            required = 1
+        }
+    }
+    90 = RESTORE_REGISTER
+}
+
+lib.dynamicContentSlide =< lib.dynamicContent
+lib.dynamicContentSlide.20.slide = -1
+
+lib.dynamicContentBannerSlide =< lib.dynamicContentSlide
+lib.dynamicContentBannerSlide {
+    20.renderObj = FILES
+    20.renderObj {
+        references {
+            table = tt_content
+            uid.data = uid
+            fieldName = image
+        }
+        renderObj = IMG_RESOURCE
+        renderObj {
+            file.import.data = file:current:originalUid
+        }
+    }
+}
+
+#############################
+###### Custom Content #######
+#############################
+lib.fluidContent = FLUIDTEMPLATE
+lib.fluidContent {
+    templateRootPaths.0 = EXT:c4theme/Resources/Private/Templates/ContentElements/
+}
+
+tt_content {
+    cr_itemdetail < lib.fluidContent
+    cr_itemdetail {
+        templateName = CRItemDetail
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = image
+                as = image
+            }
+        }
+    }
+
+    cr_logobanner < lib.fluidContent
+    cr_logobanner {
+        templateName = CRLogoBanner
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = image
+                as = image
+            }
+        }
+    }
+
+    cr_banner < lib.fluidContent
+    cr_banner {
+        templateName = CRBanner
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = image
+                as = images
+            }
+        }
+    }
+}
+
+#############################
+###### b13/container ########
+#############################
+tt_content.c4theme_2col < lib.contentElement
+tt_content.c4theme_2col {
+    templateName = C4Theme2Col
+    templateRootPaths.10 = EXT:c4theme/Resources/Private/Templates/ContentElements/
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}
+
+tt_content.c4theme_3col < lib.contentElement
+tt_content.c4theme_3col {
+    templateName = C4Theme3Col
+    templateRootPaths.10 = EXT:c4theme/Resources/Private/Templates/ContentElements/
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}
+
+tt_content.c4theme_4col < lib.contentElement
+tt_content.c4theme_4col {
+    templateName = C4Theme4Col
+    templateRootPaths.10 = EXT:c4theme/Resources/Private/Templates/ContentElements/
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}
+
+##############
+#### Libs ####
+##############
+lib.fluidTemplates = FLUIDTEMPLATE
+lib.fluidTemplates {
+    # Template file is derived from the page's Backend Layout identifier,
+    # e.g. backend layout "default" -> Default.html, "startseite" -> Startseite.html.
+    templateName = TEXT
+    templateName {
+        cObject = TEXT
+        cObject {
+            data = pagelayout
+            required = 1
+            case = uppercamelcase
+            split {
+                token = pagets__
+                cObjNum = 1
+                1.current = 1
+            }
+        }
+        ifEmpty = Default
+    }
+    templateRootPaths.0 = EXT:c4theme/Resources/Private/Templates/Page/
+    partialRootPaths.0 = EXT:c4theme/Resources/Private/Partials/Page/
+    layoutRootPaths.0 = EXT:c4theme/Resources/Private/Layouts/Page/
+    variables {
+        siteTitle = TEXT
+        siteTitle.data = TSFE:tmpl|sitetitle
+    }
+    settings {
+        rootpage = {$c4theme.rootpage}
+        mainLogoPath = {$c4theme.mainLogoPath}
+        navigationLogoPath = {$c4theme.navigationLogoPath}
+    }
+    dataProcessing {
+        10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        10.references.fieldName = media
+        30 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        30 {
+            special = directory
+            special.value = {$c4theme.mainNavPid}
+            as = mainNavigation
+            levels = 1
+            titleField = nav_title // title
+        }
+        40 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        40 {
+            special = directory
+            special.value = {$c4theme.socialNavPid}
+            as = socialNavigation
+            levels = 1
+            titleField = nav_title // title
+            dataProcessing {
+                10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+                10.references.fieldName = media
+            }
+        }
+        50 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        50 {
+            special = directory
+            special.value = {$c4theme.datenschutzmenuPid}
+            as = datenschutzNavigation
+            levels = 1
+            titleField = nav_title // title
+        }
+    }
+}
+
+lib.bodyTag = FLUIDTEMPLATE
+lib.bodyTag {
+    file = EXT:c4theme/Resources/Private/Partials/Page/BodyTag.html
+    variables {
+        bodyId = TEXT
+        bodyId {
+            insertData = 1
+            value = body_id_{field:uid}
+        }
+        class_layoutId = TEXT
+        class_layoutId {
+            insertData = 1
+            value = template-{TSFE:page|layout}
+        }
+        class_pageUid = TEXT
+        class_pageUid {
+            insertData = 1
+            value = page-{field:uid}
+        }
+        class_bodyStyle = TEXT
+        class_bodyStyle {
+            insertData = 1
+            value = {GP:style}
+        }
+        class_bodyfsize = TEXT
+        class_bodyfsize {
+            insertData = 1
+            value = style-{GP:fsize}
+        }
+    }
+}
+
+##############
+#### PAGE ####
+##############
+page = PAGE
+page {
+    config {
+        doctype = html5
+        disablePrefixComment = 1
+        index_enable = 1
+    }
+
+    shortcutIcon = {$c4theme.faviconPath}/favicon.ico
+
+    headerData {
+        100 = FLUIDTEMPLATE
+        100 {
+            file = EXT:c4theme/Resources/Private/Partials/Page/Favicons.html
+            variables {
+                faviconPath = TEXT
+                faviconPath.value = {$c4theme.faviconPath}
+            }
+        }
+
+        9999 = FLUIDTEMPLATE
+        9999 {
+            file = EXT:c4theme/Resources/Private/Partials/Page/ServiceGoogleAnalytics.html
+            variables {
+                googleAnalytics = TEXT
+                googleAnalytics.value = {$c4theme.googleAnalytics}
+            }
+        }
+    }
+
+    meta {
+        viewport = width=device-width, initial-scale=1, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes
+        format-detection = telephone=no
+        description = {$page.meta.description}
+        description.override.field = description
+        author = {$page.meta.author}
+        author.override.field = author
+        keywords = {$page.meta.keywords}
+        keywords.override.field = keywords
+        X-UA-Compatible = IE=edge
+        X-UA-Compatible.attribute = http-equiv
+
+        og:title {
+            attribute = property
+            field = title
+        }
+        og:site_name {
+            attribute = property
+            data = TSFE:tmpl|sitetitle
+        }
+        og:description = {$page.meta.description}
+        og:description {
+            attribute = property
+            field = description
+        }
+    }
+
+    includeCSS {
+        app = EXT:c4theme/Resources/Public/Css/main.css
+        custom = EXT:c4theme/Resources/Public/Css/custom.css
+    }
+
+    includeJS {
+        jquery = EXT:c4theme/Resources/Public/Js/jquery.min.js
+        custom = EXT:c4theme/Resources/Public/Js/custom.js
+    }
+
+    bodyTagCObject < lib.bodyTag
+    10 < lib.fluidTemplates
+}
+
+page.meta {
+    description =
+    author =
+    keywords =
+}
+
+################
+#### CONFIG ####
+################
+config {
+    pageRendererTemplateFile = EXT:c4theme/Resources/Private/Layouts/PageRenderer.html
+    absRefPrefix = auto
+    uniqueLinkVars = 1
+    pageTitleFirst = 1
+    linkVars = L
+    renderCharset = utf-8
+    metaCharset = utf-8
+    doctype = html5
+    disablePrefixComment = 1
+    index_enable = 1
+    index_externals = 1
+    index_metatags = 1
+    pageTitleSeparator = -
+    pageTitleSeparator.noTrimWrap = | | |
+    spamProtectEmailAddresses = ascii
+    spamProtectEmailAddresses_atSubst = @
+    noScaleUp = 1
+}
+config.baseURL = {$c4theme.baseURL}
+[globalString = _SERVER|HTTPS=on]
+    config.baseURL = {$c4theme.baseURL}
+[global]

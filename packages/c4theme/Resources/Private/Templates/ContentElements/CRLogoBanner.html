@@ -1,0 +1,22 @@
+<section class="sc-product-detail-header">
+
+    	<div class="row">
+    	<div class="text col-md-6 col-lg-offset-1">
+    		<h2>{data.header}</h2>
+
+    		<f:format.html>{data.bodytext}</f:format.html>
+
+
+    	</div>
+    	<div class="image hcenter col-md-6">
+		<f:if condition="{image.0}">
+		    <f:then>
+		        <header class="product-detail__header text-center">
+		          <h1 class="sr-only">{data.header}</h1>
+		          <f:image image="{image.0}" alt="{data.header}"/>
+		        </header>
+		    </f:then>
+		</f:if>
+		</div>
+	</div>
+</section>

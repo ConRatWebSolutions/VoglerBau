@@ -1,0 +1,43 @@
+<!-- START : Header -->
+<header class="header-main bg-coffee" role="banner">
+
+        <!-- START : Logo -->
+            <f:link.page pageUid="{settings.rootpage}"  class="header-main__logo" >
+                <img class="logo" src="{settings.mainLogoPath}" alt="{siteTitle}">
+            </f:link.page>
+        <!-- END : Logo -->
+
+
+
+  <div class="navigation">
+
+	  <nav class="navbar navbar-expand-lg navbar-dark info-color">
+
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+	          <ul class="navbar-nav mr-auto">
+	            <f:for each="{mainNavigation}" as="menuItem">
+	                <li id="navbar{menuItem.data.uid}" class="{f:if(condition:'{menuItem.active}', then: 'active')}">
+                        <f:if condition='{menuItem.target}'>
+                            <f:then>
+                            <a href="{menuItem.link}" class="primary-menu__link" title="{menuItem.title}" target="{menuItem.target}">{menuItem.title}</a>
+                            </f:then>
+                            <f:else>
+                            <a href="/#<f:format.case mode="lower">{menuItem.title}</f:format.case>" class="primary-menu__link" title="{menuItem.title}">{menuItem.title}</a>
+                            </f:else>
+                        </f:if>
+	                </li>
+	            </f:for>
+	          </ul>
+
+
+
+	    </div>
+	</nav>
+  </div>
+
+</header>
+<!-- END : Header -->

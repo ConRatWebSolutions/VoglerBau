@@ -1,0 +1,20 @@
+<f:render partial="Header" arguments="{settings:settings,mainNavigation:mainNavigation,topNavigation:topNavigation,siteTitle:siteTitle}"/>
+<main id="home" class="main">
+	<f:render section="Main" />
+	<f:if condition="{f:cObject(typoscriptObjectPath: 'lib.dynamicContentBannerSlide', data:'{colPos:110}')}">
+		<section class="gallery-section" role="presentation" tabindex="-1">
+	      <div class="gallery">
+	        <div class="gallery__image bg-image" style="background-image: url({f:cObject(typoscriptObjectPath: 'lib.dynamicContentBannerSlide', data:'{colPos:110}')});">
+	          <img src="{f:cObject(typoscriptObjectPath: 'lib.dynamicContentBannerSlide', data:'{colPos:110}')}" alt="">
+	        </div>
+	      </div>
+	    </section>
+	</f:if>
+
+	<section class="map-section" role="presentation" tabindex="-1">
+    	<div class="map">
+			<f:cObject typoscriptObjectPath="lib.dynamicContentSlide" data="{colPos: '120'}" />
+		</div>
+	</section>
+</main>
+<f:render partial="Footer" arguments="{datenschutzNavigation:datenschutzNavigation,socialNavigation:socialNavigation}"/>
