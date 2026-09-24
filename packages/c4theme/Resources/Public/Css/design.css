@@ -1,0 +1,374 @@
+/*
+ * Vogler Bau – optische Überarbeitung (2026-09)
+ * Wird nach main.css und custom.css geladen und überschreibt nur gezielt.
+ */
+:root {
+    --vb-red: #c8302a;
+    --vb-red-dark: #a82520;
+    --vb-dark: #2d2d2d;
+    --vb-darker: #1f1f1f;
+    --vb-light: #f4f3f1;
+    --vb-text: #2b2b2b;
+    --vb-header-h: 76px;
+}
+
+body {
+    color: var(--vb-text);
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+}
+html { scroll-padding-top: calc(var(--vb-header-h) + 16px); scroll-behavior: smooth; }
+.main { overflow-x: hidden; }
+
+/* ---------- Header / Navigation ---------- */
+.navigation {
+    background: var(--vb-dark);
+    padding: 0;
+    height: var(--vb-header-h);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .25);
+}
+.navigation .navbar {
+    max-width: 1140px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.navbar-nav,
+.navbar-nav.mr-auto {
+    width: auto;
+    margin: 0 0 0 auto !important;
+    gap: 6px;
+}
+/* feste Abstände pro Menüpunkt (Platz für das mittige Logo) entfallen */
+.navbar-nav > li { padding: 0 !important; }
+.primary-menu__link {
+    display: block;
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+}
+.primary-menu__link::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 4px;
+    height: 2px;
+    background: var(--vb-red);
+    transform: scaleX(0);
+    transition: transform .2s ease;
+}
+.primary-menu__link:hover,
+.primary-menu__link:focus { color: #fff; text-decoration: none; }
+.primary-menu__link:hover::after,
+.primary-menu__link:focus::after { transform: scaleX(1); }
+
+/* Logo links, ragt als rotes Schild über den Header */
+.logo,
+.logo[style] {
+    left: max(15px, calc(50% - 555px));
+    right: auto;
+    margin: 0;
+    width: 150px !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .3);
+    transition: width .25s ease;
+}
+body.is-scrolled .logo { width: 76px !important; }
+
+/* ---------- Hero ---------- */
+.product-detail-container { margin-top: var(--vb-header-h); }
+.product-detail-item { position: relative; }
+.product-detail-item__image img {
+    display: block;
+    width: 100%;
+    height: clamp(420px, 68vh, 680px);
+    object-fit: cover;
+}
+.product-detail-item__image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .55) 0%, rgba(0, 0, 0, .15) 60%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+}
+.product-detail-overlay,
+.product-detail-overlay[style] {
+    display: block;
+    top: auto;
+    bottom: 12%;
+    left: max(15px, calc(50% - 555px));
+    width: min(620px, calc(100% - 30px));
+    padding: 28px 32px;
+    text-align: left;
+    background: rgba(31, 31, 31, .82);
+    border-left: 6px solid var(--vb-red);
+}
+.product-detail-overlay h2 {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+.product-detail-overlay p { font-size: 17px; line-height: 1.6; margin-bottom: 8px; }
+
+/* Unterseiten: flaches Kopfbild ohne Willkommenstext */
+body:not(.page-1) .product-detail-item__image img { height: clamp(220px, 32vh, 340px); }
+body:not(.page-1) .product-detail-overlay { display: none !important; }
+body:not(.page-1) .product-detail-item__image::after { background: rgba(0, 0, 0, .15); }
+body:not(.page-1) .teaser-section,
+body:not(.page-1) .product-list-section { padding-top: 60px; padding-bottom: 60px; }
+
+/* leere Bereiche (Template gibt sie auf Unterseiten ohne Inhalt aus) */
+.bggray:not(:has(.frame)) { display: none; }
+.product-list .row .row { margin-left: 0; margin-right: 0; }
+
+a { color: var(--vb-red); }
+a:hover { color: var(--vb-red-dark); }
+
+/* ---------- Abschnittsüberschriften ---------- */
+.product-list .frame-layout-1:has(header h2) header h2,
+.ce-headline-center,
+.sc-product-detail-header h2 {
+    position: relative;
+    font-size: clamp(30px, 3.2vw, 40px);
+    font-weight: 700;
+    padding-bottom: 18px;
+    margin-bottom: 12px;
+}
+.product-list .frame-layout-1:has(header h2) header h2::after,
+.ce-headline-center::after,
+.sc-product-detail-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 64px;
+    height: 4px;
+    background: var(--vb-red);
+}
+.product-list .frame-layout-1:has(header h2) header h2::after,
+.ce-headline-center::after { left: 50%; transform: translateX(-50%); }
+.sc-product-detail-header h2::after { left: 0; }
+
+/* ---------- Leistungen als Kacheln (nur Startseite = page-1) ---------- */
+.product-list-section { padding-top: 80px; }
+.page-1 .product-list > .row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    margin: 0 0 90px;
+}
+.page-1 .product-list > .row > .frame { width: auto; margin: 0; }
+.page-1 .product-list > .row > .frame-type-html { grid-column: 1 / -1; height: 0; }
+
+/* Einleitung „Leistungen – Unser Angebot im Überblick“ */
+.product-list .frame-layout-1:has(header h2) {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.product-list .frame-layout-1:has(header h2) .ce-gallery { display: none; }
+.product-list .frame-layout-1:has(header h2) .ce-bodytext {
+    width: 100% !important;
+    float: none;
+    text-align: center;
+}
+.product-list .frame-layout-1:has(header h2) header h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* einzelne Leistung */
+.product-list .frame-layout-1:not(:has(header h2)) .ce-textpic {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .09);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.product-list .frame-layout-1:not(:has(header h2)) .ce-textpic:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
+}
+.product-list .frame-layout-1:not(:has(header h2)) .ce-gallery,
+.product-list .frame-layout-1:not(:has(header h2)) .ce-bodytext {
+    width: 100% !important;
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+.product-list .frame-layout-1:not(:has(header h2)) .ce-gallery { order: -1; }
+.product-list .frame-layout-1:not(:has(header h2)) .ce-column,
+.product-list .frame-layout-1:not(:has(header h2)) .image { padding: 0; margin: 0; }
+.product-list .frame-layout-1:not(:has(header h2)) img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+.product-list .frame-layout-1:not(:has(header h2)) .ce-textpic:hover img { transform: scale(1.04); }
+.product-list .frame-layout-1:not(:has(header h2)) .ce-bodytext {
+    text-align: left !important;
+    padding: 20px 22px 24px;
+    border-top: 4px solid var(--vb-red);
+    position: relative;
+    z-index: 1;
+    background: #fff;
+}
+.product-list .frame-layout-1 .ce-bodytext > p:has(+ h1),
+.product-list .frame-layout-1 .ce-bodytext h1 > br:first-child { display: none; }
+.product-list .frame-layout-1:not(:has(header h2)) h1 {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+    hyphens: auto;
+}
+
+/* ---------- Telefon-Band ---------- */
+.bggray { background: var(--vb-dark); padding: 56px 15px; }
+.text-notably {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 auto;
+    padding: 16px 30px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--vb-red);
+    font-size: clamp(22px, 3vw, 34px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+}
+#c14 { text-align: center; }
+.text-notably::before,
+.text-notably::before {
+    content: '';
+    position: static;
+    width: 1em;
+    height: 1em;
+    flex: 0 0 1em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.text-notably a,
+.text-notably a:hover { color: #fff; text-decoration: none; }
+.text-notably:hover { background: var(--vb-red-dark); }
+
+/* ---------- Referenzen ---------- */
+#c19 { margin-top: 90px; margin-bottom: 30px; }
+
+/* ---------- Firmenhistorie ---------- */
+.sc-product-detail-header {
+    max-width: 1140px;
+    margin: 90px auto;
+    padding: 0 15px;
+}
+.sc-product-detail-header .row { align-items: center; }
+.sc-product-detail-header .col-lg-offset-1 { padding-left: 15px; }
+.sc-product-detail-header ul li { font-size: 17px; line-height: 1.7; margin-bottom: 18px; }
+.sc-product-detail-header .image img { border-radius: 4px; box-shadow: 0 6px 20px rgba(0, 0, 0, .12); }
+
+/* ---------- Kontakt ---------- */
+.bggray .container { max-width: 1140px; }
+.bggray .frame-layout-1 {
+    padding: 30px 0 0 50px;
+    font-size: 19px;
+    line-height: 1.7;
+}
+.bggray label { color: #fff; font-weight: 600; font-size: 15px; }
+.bggray .form-control {
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 14px;
+    height: auto;
+}
+.bggray .form-control:focus { box-shadow: 0 0 0 3px rgba(200, 48, 42, .5); }
+.bggray .btn-primary {
+    background: var(--vb-red);
+    border-color: var(--vb-red);
+    padding: 12px 34px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+.bggray .btn-primary:hover,
+.bggray .btn-primary:focus { background: var(--vb-red-dark); border-color: var(--vb-red-dark); }
+.bggray .form-check-label,
+.bggray .form-check-label a { color: #ddd; font-weight: 400; font-size: 14px; }
+
+/* ---------- Footer ---------- */
+.header-main, footer { background: var(--vb-darker); }
+.footer-main__bottom { padding: 22px 0; }
+.footer-main__nav a { font-size: 15px; padding: 6px 16px; color: #ccc; }
+.footer-main__nav a:hover { color: #fff; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 991px) {
+    :root { --vb-header-h: 64px; }
+    .navigation .navbar { flex-wrap: wrap; padding: 0 15px; }
+    .navbar-toggler {
+        display: block;
+        margin-left: auto;
+        border-color: rgba(255, 255, 255, .4);
+        padding: 8px 10px;
+    }
+    .navbar-collapse {
+        position: absolute;
+        top: var(--vb-header-h);
+        left: 0;
+        right: 0;
+        background: var(--vb-dark);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+    }
+    .navbar-collapse.show { display: block; }
+    .navbar-nav { margin: 0; padding: 36px 0 16px; }
+    .primary-menu__link { padding: 14px 24px; font-size: 16px; border-top: 1px solid rgba(255, 255, 255, .08); }
+    .primary-menu__link::after { display: none; }
+    .logo, .logo[style] { width: 96px !important; }
+    body.is-scrolled .logo { width: 64px !important; }
+
+    .page-1 .product-list > .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bggray .col-md-6 { width: 100%; flex: 0 0 100%; max-width: 100%; }
+    .bggray .frame-layout-1 { padding: 40px 0 0; }
+    .sc-product-detail-header .col-md-6 { flex: 0 0 100%; max-width: 100%; }
+    .sc-product-detail-header .image { margin-top: 30px; }
+}
+
+/* ---------- Handy ---------- */
+@media (max-width: 767px) {
+    .header-main__logo { position: static; }
+    .header-main__logo img { width: 80px !important; }
+    .logo, .logo[style] { left: 15px; }
+    body.is-scrolled .logo { width: 56px !important; }
+
+    .product-detail-item__image img { height: 300px; }
+    .product-detail-item__image::after { display: none; }
+    .product-detail-overlay,
+    .product-detail-overlay[style] {
+        position: static;
+        width: 100%;
+        padding: 26px 20px;
+        background: var(--vb-dark);
+        color: #fff;
+    }
+
+    .product-list-section { padding-top: 56px; }
+    .product-list-section > .container,
+    .teaser-section > .container { padding-left: 20px; padding-right: 20px; }
+    .page-1 .product-list > .row { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 60px; }
+    .frame-layout-1 .ce-left .ce-bodytext,
+    .frame-layout-1 .ce-right .ce-bodytext { padding: 18px 20px 22px; }
+
+    .text-notably { padding: 14px 20px; }
+    .sc-product-detail-header { margin: 60px auto; }
+    .bggray { padding: 44px 15px; }
+    .footer-main__nav ul { padding: 0; }
+    .footer-main__nav li { float: none; display: inline-block; }
+}

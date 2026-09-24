@@ -315,6 +315,7 @@ page {
     includeCSS {
         app = EXT:c4theme/Resources/Public/Css/main.css
         custom = EXT:c4theme/Resources/Public/Css/custom.css
+        design = EXT:c4theme/Resources/Public/Css/design.css
     }
 
     includeJS {
