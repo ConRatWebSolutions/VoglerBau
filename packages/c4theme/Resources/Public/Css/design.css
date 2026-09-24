@@ -222,9 +222,9 @@ a:hover { color: var(--vb-red-dark); }
     z-index: 1;
     background: #fff;
 }
-.product-list .frame-layout-1 .ce-bodytext > p:has(+ h1),
-.product-list .frame-layout-1 .ce-bodytext h1 > br:first-child { display: none; }
-.product-list .frame-layout-1:not(:has(header h2)) h1 {
+.product-list .frame-layout-1 .ce-bodytext > p:has(+ :is(h1, h3)),
+.product-list .frame-layout-1 .ce-bodytext :is(h1, h3) > br:first-child { display: none; }
+.product-list .frame-layout-1:not(:has(header h2)) :is(h1, h3) {
     font-size: 19px;
     font-weight: 600;
     line-height: 1.35;
@@ -302,6 +302,22 @@ a:hover { color: var(--vb-red-dark); }
 .bggray .btn-primary:focus { background: var(--vb-red-dark); border-color: var(--vb-red-dark); }
 .bggray .form-check-label,
 .bggray .form-check-label a { color: #ddd; font-weight: 400; font-size: 14px; }
+/* Einwilligungs-Checkbox bündig mit den Feldern */
+.bggray .form-check { padding-left: 0; }
+.bggray .form-check-wrapping-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.bggray .form-check-input {
+    position: static;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: var(--vb-red);
+}
+.bggray .form-check-label { margin: 0; line-height: 1.5; }
 
 /* ---------- Footer ---------- */
 .header-main, footer { background: var(--vb-darker); }
