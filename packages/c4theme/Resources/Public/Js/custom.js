@@ -38,3 +38,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+// Mobiles Menü öffnen/schließen – Bootstrap-JS ist nicht eingebunden
+document.addEventListener('DOMContentLoaded', function () {
+    var toggler = document.querySelector('.navbar-toggler');
+    var menu = document.getElementById('navbarSupportedContent');
+    if (!toggler || !menu) {
+        return;
+    }
+    var setOpen = function (open) {
+        menu.classList.toggle('show', open);
+        toggler.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    toggler.addEventListener('click', function () {
+        setOpen(!menu.classList.contains('show'));
+    });
+    menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+    });
+});
