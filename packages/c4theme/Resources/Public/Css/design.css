@@ -80,7 +80,7 @@ html { scroll-padding-top: calc(var(--vb-header-h) + 16px); scroll-behavior: smo
 body.is-scrolled .logo { width: 76px !important; }
 
 /* ---------- Hero ---------- */
-.product-detail-container { margin-top: var(--vb-header-h); }
+.product-detail-container { margin-top: var(--vb-header-h); margin-bottom: 0; }
 .product-detail-item { position: relative; }
 .product-detail-item__image img {
     display: block;
@@ -153,7 +153,7 @@ a:hover { color: var(--vb-red-dark); }
 .sc-product-detail-header h2::after { left: 0; }
 
 /* ---------- Leistungen als Kacheln (nur Startseite = page-1) ---------- */
-.product-list-section { padding-top: 80px; }
+.product-list-section { padding-top: 60px; }
 .page-1 .product-list > .row {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -161,7 +161,9 @@ a:hover { color: var(--vb-red-dark); }
     margin: 0 0 90px;
 }
 .page-1 .product-list > .row > .frame { width: auto; margin: 0; }
-.page-1 .product-list > .row > .frame-type-html { grid-column: 1 / -1; height: 0; }
+.page-1 .product-list > .row { position: relative; }
+/* Sprunganker (#leistungen) ohne eigene Rasterzeile */
+.page-1 .product-list > .row > .frame-type-html { position: absolute; top: 0; left: 0; height: 0; }
 
 /* Einleitung „Leistungen – Unser Angebot im Überblick“ */
 .product-list .frame-layout-1:has(header h2) {
@@ -375,7 +377,7 @@ a:hover { color: var(--vb-red-dark); }
         color: #fff;
     }
 
-    .product-list-section { padding-top: 56px; }
+    .product-list-section { padding-top: 44px; }
     .product-list-section > .container,
     .teaser-section > .container { padding-left: 20px; padding-right: 20px; }
     .page-1 .product-list > .row { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 60px; }
