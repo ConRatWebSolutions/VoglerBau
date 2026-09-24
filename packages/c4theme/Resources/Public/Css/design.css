@@ -372,20 +372,22 @@ a:hover { color: var(--vb-red-dark); }
     .product-detail-overlay[style] {
         position: static;
         width: 100%;
-        padding: 26px 20px;
+        padding: 26px 24px 26px 18px;
         background: var(--vb-dark);
         color: #fff;
     }
 
     .product-list-section { padding-top: 44px; }
     .product-list-section > .container,
-    .teaser-section > .container { padding-left: 20px; padding-right: 20px; }
+    .teaser-section > .container { padding-left: 24px; padding-right: 24px; }
     .page-1 .product-list > .row { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 60px; }
     .frame-layout-1 .ce-left .ce-bodytext,
     .frame-layout-1 .ce-right .ce-bodytext { padding: 18px 20px 22px; }
 
     .text-notably { padding: 14px 20px; }
-    .sc-product-detail-header { margin: 60px auto; }
+    .sc-product-detail-header { margin: 60px auto; padding: 0 24px; }
+    .sc-product-detail-header .row { margin: 0; }
+    .sc-product-detail-header .row > div { padding-left: 0; padding-right: 0; }
     .bggray { padding: 44px 15px; }
     .footer-main__nav ul { padding: 0; }
     .footer-main__nav li { float: none; display: inline-block; }
