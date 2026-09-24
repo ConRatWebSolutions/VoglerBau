@@ -261,3 +261,32 @@ img{max-width: 100%; height:auto}
 
 
   
+/* ===== Korrekturen Mobilansicht (2026-09) – Funktion, kein neues Design ===== */
+
+/* Menü: wird per custom.js geöffnet (Bootstrap-JS ist nicht eingebunden) */
+@media (max-width: 991px) {
+	.navbar-collapse.show { display: block; }
+	.navbar-collapse .navbar-nav { width: 100%; margin: 10px 0; }
+	.navbar-collapse .navbar-nav > li { padding: 0 !important; }
+	.navbar-collapse .primary-menu__link { display: block; padding: 12px 10px; }
+}
+
+@media (max-width: 767px) {
+	/* nichts über den Bildschirmrand hinaus */
+	.ce-left .image, .ce-right .image { padding: 0; }
+	.ce-textpic, .ce-gallery, .ce-row, .ce-column, .ce-bodytext { max-width: 100%; }
+	.product-list-section .row, .teaser-section .row { margin-left: 0; margin-right: 0; }
+	.product-list-section .col-md-6, .teaser-section .col-md-6 { padding-left: 15px; padding-right: 15px; }
+	.frame-layout-1 h1 { font-size: 28px; overflow-wrap: break-word; hyphens: auto; }
+
+	/* Willkommenstext unter dem Startbild statt ausgeblendet */
+	.product-detail-overlay {
+		display: block !important;
+		position: static;
+		width: auto;
+		padding: 20px 15px;
+		background: #8d8a8a;
+		color: #fff;
+	}
+	.product-detail-overlay h2 { font-size: 28px; }
+}
