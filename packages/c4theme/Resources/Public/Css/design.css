@@ -261,6 +261,10 @@ a:hover { color: var(--vb-red-dark); }
 .text-notably a,
 .text-notably a:hover { color: #fff; text-decoration: none; }
 .text-notably:hover { background: var(--vb-red-dark); }
+.text-notably .vb-tel__nr { white-space: nowrap; }
+@media (max-width: 479px) {
+    .text-notably .vb-tel__label { display: none; }
+}
 
 /* ---------- Referenzen ---------- */
 #c19 { margin-top: 90px; margin-bottom: 30px; }

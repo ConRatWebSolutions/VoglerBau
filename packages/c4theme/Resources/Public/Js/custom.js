@@ -33,7 +33,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         var link = document.createElement('a');
         link.href = 'tel:' + match[0].replace(/[^\d+]/g, '');
-        link.innerHTML = el.innerHTML;
+        // Beschriftung und Nummer getrennt, damit die Nummer nie umbricht (Beschriftung mobil ausgeblendet)
+        var label = document.createElement('span');
+        label.className = 'vb-tel__label';
+        label.textContent = el.textContent.slice(0, match.index).trim();
+        var number = document.createElement('span');
+        number.className = 'vb-tel__nr';
+        number.textContent = match[0];
+        link.appendChild(label);
+        link.appendChild(document.createTextNode(' '));
+        link.appendChild(number);
         el.innerHTML = '';
         el.appendChild(link);
     });
